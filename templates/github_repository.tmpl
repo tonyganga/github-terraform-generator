@@ -1,0 +1,41 @@
+resource "github_repository" "{{.Name}}" {
+{{- if .Name }}
+  name               = "{{.Name}}"
+{{- else}}
+  name               = ""
+{{- end}}
+{{- if .Description}}
+  description        = "{{.Description}}"
+{{- else}}
+  description        = ""
+{{- end}}
+{{- if .Homepage}}
+  homepage_url       = "{{.Homepage}}"
+{{- else}}
+  homepage_url       = ""
+{{- end}}
+  private            = {{.Private}}
+  has_issues         = {{.HasIssues}}
+  has_projects       = {{.HasProjects}}
+  has_wiki           = {{.HasWiki}}
+  allow_merge_commit = {{.AllowMergeCommit}}
+  allow_squash_merge = {{.AllowSquashMerge}}
+  allow_rebase_merge = {{.AllowRebaseMerge}}
+  has_downloads      = {{.HasDownloads}}
+  auto_init          = false
+{{- if .DefaultBranch}}
+  default_branch     = "{{.DefaultBranch}}"
+{{- else}}
+  default_branch     = ""
+{{- end }}
+  archived           = {{.Archived}}
+{{- if .Topics }}
+  topics = [
+{{- range .Topics}}
+    "{{.}}",  
+{{- end}}
+  ]
+{{- else}}
+  topics             = []
+{{- end}}
+}
